@@ -36,6 +36,42 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    profile: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Profile",
+    },
+    bio: {
+      type: String,
+      trim: true,
+      maxlength: [300, "Maximum caracter 300"],
+    },
+    avatarUrl: {
+      type: String,
+      trim: true,
+    },
+    lastLoginAt: {
+      type: Date,
+      default: null,
+    },
+    followers: {
+      type: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User",
+        },
+      ],
+      default: [],
+    },
+
+    following: {
+      type: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User",
+        },
+      ],
+      default: [],
+    },
   },
   { timestamps: true },
 );

@@ -5,23 +5,28 @@ const commentSchema = new mongoose.Schema(
     text: {
       type: String,
       required: [true, "Comment is required"],
-      minlength: [1, "Title must be at least 3 characters"],
-      maxlength: [1000, "Title cannot exceed 150 characters"],
+      trim: true,
+      minlength: [1, "Comment must contain at least 1 character"],
+      maxlength: [1000, "Comment cannot exceed 1000 characters"],
     },
+
     likes: {
       type: Number,
       default: 0,
       min: [0, "Likes cannot be negative"],
     },
+
     isEdited: {
       type: Boolean,
       default: false,
     },
+
     post: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Post",
       required: [true, "Post reference is required"],
     },
+
     author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
@@ -32,6 +37,7 @@ const commentSchema = new mongoose.Schema(
     timestamps: true,
   },
 );
+
 const Comment = mongoose.model("Comment", commentSchema);
 
 export default Comment;
